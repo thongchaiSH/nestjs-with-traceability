@@ -1,8 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import {ContextAsyncHooks} from 'traceability';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  app.use(ContextAsyncHooks.getExpressMiddlewareTracking());
+  await app.listen(3001);
 }
 bootstrap();
